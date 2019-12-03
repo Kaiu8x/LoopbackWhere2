@@ -20,6 +20,11 @@ import {
 import {Event} from '../models';
 import {EventRepository} from '../repositories';
 
+import {inject} from '@loopback/context';
+import {securityId, SecurityBindings, UserProfile} from '@loopback/security';
+import {authenticate} from '@loopback/authentication';
+
+@authenticate('jwt')
 export class EventsControllerController {
   constructor(
     @repository(EventRepository)

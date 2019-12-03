@@ -1,13 +1,26 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany, hasOne} from '@loopback/repository';
+import {UserCredentials} from './user-credentials.model';
 
-@model()
+@model({
+  settings: {
+    indexes: {
+      uniqueEmail: {
+        keys: {
+          email: 1,
+        },
+        options: {
+          unique: true,
+        },
+      },
+    },
+  },
+})
 export class User extends Entity {
   @property({
-    type: 'number',
+    type: 'string',
     id: true,
-    generated: true,
   })
-  id?: number;
+  id: string;
 
   @property({
     type: 'string',
@@ -17,9 +30,8 @@ export class User extends Entity {
 
   @property({
     type: 'string',
-    required: true,
   })
-  firstName: string;
+  firstName?: string;
 
   @property({
     type: 'string',
@@ -48,6 +60,8 @@ export class User extends Entity {
   })
   userPreferences?: object;
 
+  @hasOne(() => UserCredentials)
+  userCredentials: UserCredentials;
 
   constructor(data?: Partial<User>) {
     super(data);

@@ -1,0 +1,7 @@
+{
+  "name": "dbMongo",
+  "connector": "mongodb",
+  "url": "mongodb+srv://admin:username@cluster0-sdmyc.mongodb.net/test?retryWrites=true&w=majority",
+  "port": 27017,
+  "database": "testdb"
+}

@@ -36,14 +36,16 @@ export class Event extends Entity {
   category?: number;
 
   @property({
-    type: 'object',
+    type: 'array',
+    itemType: 'string',
   })
-  messages?: object;
+  messages?: string[];
 
   @property({
-    type: 'object',
+    type: 'array',
+    itemType: 'string',
   })
-  invited?: object;
+  invited?: string[];
 
   @property({
     type: 'number',

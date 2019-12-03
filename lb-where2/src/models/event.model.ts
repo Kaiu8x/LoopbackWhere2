@@ -37,13 +37,13 @@ export class Event extends Entity {
 
   @property({
     type: 'array',
-    itemType: 'string',
+    itemType: 'any',
   })
   messages?: string[];
 
   @property({
     type: 'array',
-    itemType: 'string',
+    itemType: 'any',
   })
   invited?: string[];
 

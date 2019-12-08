@@ -47,6 +47,12 @@ export class User extends Entity {
 
   @property({
     type: 'string',
+    required: false,
+  })
+  password: string;
+
+  @property({
+    type: 'string',
   })
   phone?: string;
 

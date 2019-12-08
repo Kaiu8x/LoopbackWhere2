@@ -1,14 +1,14 @@
 import {
-	DefaultCrudRepository,
-	juggler,
-	HasManyRepositoryFactory,
-	repository,
-	HasOneRepositoryFactory,
+  DefaultCrudRepository,
+  juggler,
+  HasManyRepositoryFactory,
+  repository,
+  HasOneRepositoryFactory,
 } from '@loopback/repository';
-import {User, UserRelations, UserCredentials} from '../models';
-import {DbMongoDataSource} from '../datasources';
-import {inject , Getter} from '@loopback/core';
-import {UserCredentialsRepository} from './user-credentials.repository';
+import { User, UserRelations, UserCredentials } from '../models';
+import { DbMongoDataSource } from '../datasources';
+import { inject, Getter } from '@loopback/core';
+import { UserCredentialsRepository } from './user-credentials.repository';
 
 export type Credentials = {
   email: string;
@@ -18,7 +18,7 @@ export type Credentials = {
 export class UserRepository extends DefaultCrudRepository<
   User,
   typeof User.prototype.id
-> {
+  > {
 
   public readonly userCredentials: HasOneRepositoryFactory<
     UserCredentials,
@@ -26,7 +26,7 @@ export class UserRepository extends DefaultCrudRepository<
   >;
 
   constructor(
-    @inject('datasources.mongo') protected datasource: juggler.DataSource,
+    @inject('datasources.dbMongo') protected datasource: juggler.DataSource,
     @repository.getter('UserCredentialsRepository')
     protected userCredentialsRepositoryGetter: Getter<
       UserCredentialsRepository

@@ -1,6 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property } from '@loopback/repository';
 
-@model({settings: {strict: false}})
+@model({ settings: { strict: false } })
 export class Event extends Entity {
   @property({
     type: 'string',
@@ -31,27 +31,27 @@ export class Event extends Entity {
   date?: string;
 
   @property({
-    type: 'number',
+    type: 'string',
   })
-  category?: number;
+  category?: string;
 
   @property({
     type: 'array',
-    itemType: 'string',
+    itemType: 'object',
   })
   messages?: any[];
 
   @property({
     type: 'array',
-    itemType: 'string',
+    itemType: 'object',
   })
-  invited?: any[];
+  invited_status?: any[];
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  owner: number;
+  owner_id: string;
 
   @property({
     type: 'array',

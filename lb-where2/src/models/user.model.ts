@@ -1,5 +1,5 @@
-import {Entity, model, property, hasMany, hasOne} from '@loopback/repository';
-import {UserCredentials} from './user-credentials.model';
+import { Entity, model, property, hasMany, hasOne } from '@loopback/repository';
+import { UserCredentials } from './user-credentials.model';
 
 @model({
   settings: {
@@ -19,6 +19,7 @@ export class User extends Entity {
   @property({
     type: 'string',
     id: true,
+    generated: true,
   })
   id: string;
 
@@ -51,14 +52,10 @@ export class User extends Entity {
 
   @property({
     type: 'array',
-    itemType: 'number',
+    itemType: 'string',
   })
-  friends?: number[];
+  friends?: string[];
 
-  @property({
-    type: 'object',
-  })
-  userPreferences?: object;
 
   @hasOne(() => UserCredentials)
   userCredentials: UserCredentials;

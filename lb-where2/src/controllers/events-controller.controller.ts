@@ -17,25 +17,25 @@ import {
   del,
   requestBody,
 } from '@loopback/rest';
-import {Event} from '../models';
-import {EventRepository} from '../repositories';
+import { Event } from '../models';
+import { EventRepository } from '../repositories';
 
-import {inject} from '@loopback/context';
-import {securityId, SecurityBindings, UserProfile} from '@loopback/security';
-import {authenticate} from '@loopback/authentication';
+import { inject } from '@loopback/context';
+import { securityId, SecurityBindings, UserProfile } from '@loopback/security';
+import { authenticate } from '@loopback/authentication';
 
 
 export class EventsControllerController {
   constructor(
     @repository(EventRepository)
-    public eventRepository : EventRepository,
-  ) {}
+    public eventRepository: EventRepository,
+  ) { }
 
   @post('/events', {
     responses: {
       '200': {
         description: 'Event model instance',
-        content: {'application/json': {schema: getModelSchemaRef(Event)}},
+        content: { 'application/json': { schema: getModelSchemaRef(Event) } },
       },
     },
   })
@@ -59,7 +59,7 @@ export class EventsControllerController {
     responses: {
       '200': {
         description: 'Event model count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -77,7 +77,7 @@ export class EventsControllerController {
           'application/json': {
             schema: {
               type: 'array',
-              items: getModelSchemaRef(Event, {includeRelations: true}),
+              items: getModelSchemaRef(Event, { includeRelations: true }),
             },
           },
         },
@@ -94,7 +94,7 @@ export class EventsControllerController {
     responses: {
       '200': {
         description: 'Event PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -102,7 +102,7 @@ export class EventsControllerController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Event, {partial: true}),
+          schema: getModelSchemaRef(Event, { partial: true }),
         },
       },
     })
@@ -118,7 +118,7 @@ export class EventsControllerController {
         description: 'Event model instance',
         content: {
           'application/json': {
-            schema: getModelSchemaRef(Event, {includeRelations: true}),
+            schema: getModelSchemaRef(Event, { includeRelations: true }),
           },
         },
       },
@@ -128,6 +128,7 @@ export class EventsControllerController {
     @param.path.string('id') id: string,
     @param.query.object('filter', getFilterSchemaFor(Event)) filter?: Filter<Event>
   ): Promise<Event> {
+    //{where: { property: { inq: [val1, val2, ...]}}}
     return this.eventRepository.findById(id, filter);
   }
 
@@ -143,7 +144,7 @@ export class EventsControllerController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Event, {partial: true}),
+          schema: getModelSchemaRef(Event, { partial: true }),
         },
       },
     })

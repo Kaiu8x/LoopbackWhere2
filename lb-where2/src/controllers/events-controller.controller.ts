@@ -1,9 +1,12 @@
+import {validateCredentials} from '../services/validator';
 import {
   Count,
   CountSchema,
   Filter,
   repository,
   Where,
+  model,
+  property,
 } from '@loopback/repository';
 import {
   post,
@@ -16,13 +19,31 @@ import {
   put,
   del,
   requestBody,
+  HttpErrors,
 } from '@loopback/rest';
 import { Event } from '../models';
 import { EventRepository } from '../repositories';
-
-import { inject } from '@loopback/context';
+import {inject} from '@loopback/core';
+import {
+  authenticate,
+  TokenService,
+  UserService,
+} from '@loopback/authentication';
 import { securityId, SecurityBindings, UserProfile } from '@loopback/security';
-import { authenticate } from '@loopback/authentication';
+import {
+  CredentialsRequestBody,
+  UserProfileSchema,
+} from './specs/user-controller.specs';
+import {Credentials} from '../repositories/user.repository';
+import {PasswordHasher} from '../services/hash.password.bcryptjs'
+import {
+  TokenServiceBindings,
+  PasswordHasherBindings,
+  UserServiceBindings,
+} from '../keys';
+import * as _ from 'lodash';
+import {SECURITY_SPEC} from '../utils/security-spec';
+
 
 
 export class EventsControllerController {
@@ -39,6 +60,7 @@ export class EventsControllerController {
       },
     },
   })
+  @authenticate('jwt')
   async create(
     @requestBody({
       content: {

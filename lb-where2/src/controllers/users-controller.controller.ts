@@ -184,6 +184,7 @@ export class UsersControllerController {
       },
     },
   })
+  @authenticate('jwt')
   async findById(
     @param.path.string('id') id: string,
     @param.query.object('filter', getFilterSchemaFor(User)) filter?: Filter<User>
@@ -221,6 +222,7 @@ export class UsersControllerController {
       },
     },
   })
+  @authenticate('jwt')
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
@@ -242,6 +244,7 @@ export class UsersControllerController {
       },
     },
   })
+  @authenticate('jwt')
   async replaceById(
     @param.path.string('id') id: string,
     @requestBody() user: User,
@@ -256,6 +259,7 @@ export class UsersControllerController {
       },
     },
   })
+  @authenticate('jwt')
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.userRepository.deleteById(id);
   }

@@ -106,6 +106,7 @@ export class EventsControllerController {
       },
     },
   })
+  @authenticate('jwt')
   async find(
     @param.query.object('filter', getFilterSchemaFor(Event)) filter?: Filter<Event>,
   ): Promise<Event[]> {
@@ -120,6 +121,7 @@ export class EventsControllerController {
       },
     },
   })
+  @authenticate('jwt')
   async updateAll(
     @requestBody({
       content: {
@@ -146,6 +148,7 @@ export class EventsControllerController {
       },
     },
   })
+  @authenticate('jwt')
   async findById(
     @param.path.string('id') id: string,
     @param.query.object('filter', getFilterSchemaFor(Event)) filter?: Filter<Event>
@@ -161,6 +164,7 @@ export class EventsControllerController {
       },
     },
   })
+  @authenticate('jwt')
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
@@ -182,6 +186,7 @@ export class EventsControllerController {
       },
     },
   })
+  @authenticate('jwt')
   async replaceById(
     @param.path.string('id') id: string,
     @requestBody() event: Event,
@@ -196,6 +201,7 @@ export class EventsControllerController {
       },
     },
   })
+  @authenticate('jwt')
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.eventRepository.deleteById(id);
   }
